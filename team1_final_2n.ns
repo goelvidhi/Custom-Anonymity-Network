@@ -1,0 +1,23 @@
+#This is a simple ns script. Comments start with #.
+set ns [new Simulator]                  
+source tb_compat.tcl
+
+set node1 	[$ns node]
+set rtr1	[$ns node]
+set node2 	[$ns node]
+
+
+set link0 [$ns duplex-link $node1 $rtr1 100Mb 0ms DropTail]
+set link1 [$ns duplex-link $node2 $rtr1 100Mb 0ms DropTail]
+
+
+
+#Set the OS on a couple.
+tb-set-node-os $node1 Ubuntu1204-64-STD
+tb-set-node-os $node2 Ubuntu1204-64-STD
+tb-set-node-os $rtr1 Ubuntu1204-64-STD       
+
+$ns rtproto Manual
+
+# Go!
+$ns run
